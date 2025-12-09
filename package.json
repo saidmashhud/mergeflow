@@ -1,0 +1,61 @@
+{
+  "name": "collabtext",
+  "version": "0.1.0",
+  "description": "A CRDT collaboration engine for real-time collaborative text editing (RGA + Lamport clocks).",
+  "type": "module",
+  "license": "MIT",
+  "author": "collabtext contributors",
+  "keywords": [
+    "crdt",
+    "rga",
+    "collaborative-editing",
+    "lamport",
+    "strong-eventual-consistency",
+    "websocket"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./crdt": {
+      "types": "./dist/crdt/index.d.ts",
+      "import": "./dist/crdt/index.js"
+    },
+    "./sync": {
+      "types": "./dist/sync/index.d.ts",
+      "import": "./dist/sync/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "server": "tsx server/start.ts",
+    "demo:dev": "vite --config demo/vite.config.ts",
+    "demo:build": "vite build --config demo/vite.config.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/ws": "^8.5.13",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

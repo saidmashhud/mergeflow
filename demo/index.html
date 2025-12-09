@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>collabtext — live CRDT convergence demo</title>
+    <style>
+      :root { color-scheme: light dark; font-family: ui-sans-serif, system-ui, sans-serif; }
+      body { margin: 0; padding: 2rem; max-width: 1000px; margin-inline: auto; }
+      h1 { font-size: 1.4rem; }
+      p.lede { color: #666; }
+      .editors { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .pane { border: 1px solid #8884; border-radius: 10px; padding: 1rem; }
+      .pane h2 { font-size: 1rem; margin: 0 0 .5rem; display: flex; justify-content: space-between; }
+      textarea { width: 100%; box-sizing: border-box; height: 220px; font-family: ui-monospace, monospace; font-size: .95rem; padding: .6rem; border-radius: 8px; border: 1px solid #8886; resize: vertical; }
+      .status { font-size: .8rem; font-weight: 600; padding: .1rem .5rem; border-radius: 999px; }
+      .online { background: #1a7f37; color: #fff; }
+      .offline { background: #b35900; color: #fff; }
+      button { cursor: pointer; border: 1px solid #8886; background: transparent; border-radius: 6px; padding: .2rem .6rem; font-size: .8rem; }
+      .converged { color: #1a7f37; } .diverged { color: #b35900; }
+      footer { margin-top: 1.5rem; font-size: .85rem; color: #777; }
+      code { background: #8881; padding: .1rem .3rem; border-radius: 4px; }
+    </style>
+  </head>
+  <body>
+    <h1>collabtext — live CRDT convergence</h1>
+    <p class="lede">
+      Two independent replicas talking through a local <code>ws</code> relay. Type in
+      either editor; both converge. Toggle a replica offline, keep typing, then
+      reconnect to watch the offline queue flush and re-converge.
+    </p>
+    <p>
+      Start the relay first: <code>pnpm run server</code> (defaults to
+      <code>ws://localhost:8080</code>).
+    </p>
+    <div class="editors">
+      <section class="pane">
+        <h2>
+          Replica A
+          <span>
+            <span id="status-A" class="status offline">offline</span>
+            <button id="toggle-A">toggle connection</button>
+          </span>
+        </h2>
+        <textarea id="editor-A" spellcheck="false"></textarea>
+      </section>
+      <section class="pane">
+        <h2>
+          Replica B
+          <span>
+            <span id="status-B" class="status offline">offline</span>
+            <button id="toggle-B">toggle connection</button>
+          </span>
+        </h2>
+        <textarea id="editor-B" spellcheck="false"></textarea>
+      </section>
+    </div>
+    <footer>
+      Convergence check: <strong id="converged">—</strong>
+    </footer>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
